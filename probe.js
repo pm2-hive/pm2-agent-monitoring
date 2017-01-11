@@ -21,6 +21,13 @@ var conf = pmx.initModule({
   }
 });
 
+pmx.configureModule({
+  human_info : [
+    ['Module', 'READY']
+  ]
+});
+
+
 var probe = pmx.probe();
 
 var pm2_procs = 0;
