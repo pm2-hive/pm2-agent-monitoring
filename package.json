@@ -1,6 +1,6 @@
 {
   "name": "pm2-agent-monitoring",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "",
   "main": "probe.js",
   "scripts": {
@@ -15,7 +15,10 @@
   "license": "ISC",
   "apps": [
     {
-      "script": "probe.js"
+      "script": "probe.js",
+      "env": {
+        "PM2_EXTRA_DISPLAY": "true"
+      }
     }
   ]
 }
