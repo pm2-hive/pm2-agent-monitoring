@@ -5,18 +5,24 @@ var path    = require('path');
 var shelljs = require('shelljs');
 
 var conf = pmx.initModule({
-  comment          : 'This module monitors PM2',
-  errors           : true,
-  latency          : false,
-  versioning       : false,
-  show_module_meta : false,
-  module_type      : 'database',
   pid              : pmx.getPID(path.join(process.env.HOME, '.pm2', 'agent.pid')),
-  bg_color  : '#333333',
   widget : {
-    logo : 'https://keymetrics.io/assets/images/pm2.20d3ef.png?v=0b71a506ce',
+    type: 'generic',
+    theme: ['#1d3b4a', '#1B2228', '#22bbe2', '#22bbe2'],
+    logo: 'https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png',
+    pid: pmx.getPID(path.join(process.env.HOME, '.pm2', 'pm2.pid')),
+
+    el : {
+      probes  : false,
+      actions : true
+    },
+
     block : {
-      main_probes : ['events/min']
+      errors           : true,
+      main_probes : ['events/min'],
+      latency          : false,
+      versioning       : false,
+      show_module_meta : false
     }
   }
 });
