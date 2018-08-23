@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "find-process": "^1.1.3",
+    "pm2": "*",
     "pmx": "latest",
-    "shelljs": "*",
-    "pm2": "*"
+    "shelljs": "*"
   },
   "author": "",
   "license": "ISC",

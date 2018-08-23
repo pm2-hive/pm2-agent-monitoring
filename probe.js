@@ -3,6 +3,7 @@ var pm2     = require('pm2');
 var fs      = require('fs');
 var path    = require('path');
 var shelljs = require('shelljs');
+var findprocess = require('find-process');
 
 var conf = pmx.initModule({
   pid              : pmx.getPID(path.join(process.env.HOME, '.pm2', 'agent.pid')),
@@ -48,6 +49,36 @@ var metric = probe.metric({
 var event_metric = probe.meter({
   name : 'events/min'
 });
+
+var proc_nb = 0
+
+probe.metric({
+  name  : 'Agent Number',
+  alert : {
+    mode : 'threshold-avg',
+    value : 2,
+    cmp : '>'
+  },
+  value : function() {
+    return proc_nb;
+  }
+});
+
+setInterval(function() {
+  findprocess('name', 'PM2 Agent')
+    .then(function (list) {
+      proc_nb = 0
+      list.filter(proc => {
+        if (proc.cmd.indexOf(path.join(process.env.HOME, '.pm2')) > -1)
+          proc_nb++
+      })
+    });
+}, 5000)
+
+findprocess('name', 'PM2 Agent')
+  .then(function (list) {
+    console.log(list)
+  });
 
 pm2.connect(function() {
 
