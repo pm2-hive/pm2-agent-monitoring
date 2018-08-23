@@ -1,6 +1,6 @@
 {
   "name": "pm2-agent-monitoring",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "",
   "main": "probe.js",
   "scripts": {

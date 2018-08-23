@@ -20,7 +20,7 @@ var conf = pmx.initModule({
 
     block : {
       errors           : true,
-      main_probes : ['events/min', 'Agent Count'],
+      main_probes : ['events/min', 'Agent Count', 'Version'],
       latency          : false,
       versioning       : false,
       show_module_meta : false
