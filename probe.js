@@ -46,6 +46,15 @@ var metric = probe.metric({
   }
 });
 
+var version = '0.0.0'
+
+probe.metric({
+  name  : 'Version',
+  value : function() {
+    return version;
+  }
+});
+
 var event_metric = probe.meter({
   name : 'events/min'
 });
@@ -69,8 +78,10 @@ setInterval(function() {
     .then(function (list) {
       proc_nb = 0
       list.filter(proc => {
-        if (proc.cmd.indexOf(path.join(process.env.HOME, '.pm2')) > -1)
+        if (proc.cmd.indexOf(path.join(process.env.HOME, '.pm2')) > -1) {
+          version = proc.cmd.split(' ')[2]
           proc_nb++
+        }
       })
     });
 }, 5000)
