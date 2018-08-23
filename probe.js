@@ -20,7 +20,7 @@ var conf = pmx.initModule({
 
     block : {
       errors           : true,
-      main_probes : ['events/min'],
+      main_probes : ['events/min', 'Agent Count'],
       latency          : false,
       versioning       : false,
       show_module_meta : false
@@ -53,7 +53,7 @@ var event_metric = probe.meter({
 var proc_nb = 0
 
 probe.metric({
-  name  : 'Agent Number',
+  name  : 'Agent Count',
   alert : {
     mode : 'threshold-avg',
     value : 2,
@@ -74,11 +74,6 @@ setInterval(function() {
       })
     });
 }, 5000)
-
-findprocess('name', 'PM2 Agent')
-  .then(function (list) {
-    console.log(list)
-  });
 
 pm2.connect(function() {
 
